@@ -1,9 +1,9 @@
 #!/usr/bin/python3
 """This module contains a function"""
 
-"""
+
 def canUnlockAll(boxes):
-    method that determines if all the boxes can be opened
+    """ method that determines if all the boxes can be opened"""
 
     [box.append('F') for box in boxes[1:]]
     boxes[0].append('T')
@@ -12,15 +12,15 @@ def canUnlockAll(boxes):
         for key in boxes[i]:
             if isinstance(key, str):
                 continue
-            if (key < len(boxes) and boxes[key][-1] == 'F'and key != i):
+            if (key < len(boxes) and boxes[key][-1] == 'F' and key != i):
                 boxes[key][-1] = 'T'
     check = ['T' in item for item in boxes]
     return all(check)
+
+
 """
-
-
 def canUnlockAll(boxes):
-    """
+
         canUnlockAll:
             this function check if all boxes can be unlocked
 
@@ -29,7 +29,7 @@ def canUnlockAll(boxes):
 
         Returns:
             boolean: returns True if all boxes can be opened or else false
-    """
+
 
     visited = {0}
     keys = boxes[0]
@@ -44,3 +44,4 @@ def canUnlockAll(boxes):
         keys = new_keys
 
     return len(visited) == len(boxes)
+"""
