@@ -26,12 +26,23 @@ def even(n):
 
 
 def odd(n):
-    """This function handles when the input to minOp func is even"""
+    """This function handles when the input to minOp func is even
     operations = ['C']
     factors = get_factors(n)
-    operations += ['P' for i in range(2, factors[-2] + 1)]
+    operations += ['P' for i in range(0, factors[-2] - 1)]
     operations.append('C')
-    operations += ['P' for i in range((n // factors[-2]) - 1)]
+    operations += ['P' for i in range((int(n) // factors[-2]) - 1)]
+    return operations
+    """
+    if n == 1:
+        return ['C', 'P', 'P']
+    operations = []
+    if n % 3 == 0:
+        operations += odd(n // 3)
+    else:
+        operations.append('C')
+        operations += ['P' for i in range(int(n) - 1)]
+    operations += ['C', 'P', 'P']
     return operations
 
 
@@ -39,14 +50,14 @@ def minOperations(n):
     """calculates the fewest number of operations needed to result in exactly
     n H characters in the file."""
     result = 0
-    if n < 2 or type(n) is not int:
+    if n < 2:
         return result
     if n % 2 == 0:
         result = even(n / 2)
     else:
         factors = get_factors(n)
         if len(factors) > 2:
-            result = odd(n)
+            result = odd(n / 3)
     if result:
         return len(result)
     return n
