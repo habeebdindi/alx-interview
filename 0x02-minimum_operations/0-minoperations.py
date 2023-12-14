@@ -4,8 +4,7 @@
 
 def get_factors(n):
     """This function returns the factors of a number"""
-    factors = [i for i in range(1, (int(n) // 2) + 1) if n % i == 0]
-    factors.append(n)
+    factors = [i for i in range(1, int(n) + 1) if n % i == 0]
     return factors
 
 
@@ -40,7 +39,7 @@ def minOperations(n):
     """calculates the fewest number of operations needed to result in exactly
     n H characters in the file."""
     result = 0
-    if n < 1:
+    if n < 2 or type(n) is not int:
         return result
     if n % 2 == 0:
         result = even(n / 2)
