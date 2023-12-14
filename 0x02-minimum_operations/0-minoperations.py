@@ -4,60 +4,30 @@
 
 def get_factors(n):
     """This function returns the factors of a number"""
-    factors = [i for i in range(1, int(n) + 1) if n % i == 0]
-    return factors
+    return [i for i in range(1, int(n) + 1) if n % i == 0]
 
 
-def even(n):
-    """This function handles when the input to minOp func is even"""
-    if n == 1:
-        return ['C', 'P']
-    operations = []
-    if n % 2 == 0:
-        operations += even(n // 2)
-    else:
-        if len(get_factors(n)) > 2:
-            operations += odd(n)
-        else:
-            operations.append('C')
-            operations += ['P' for i in range(int(n) - 1)]
-    operations += ['C', 'P']
-    return operations
+def get_prime_factors(factors):
+    """Returns the prime factors in a list"""
+    return [key for key in factors if len(get_factors(key)) < 3]
 
 
-def odd(n):
-    """This function handles when the input to minOp func is even
-    operations = ['C']
-    factors = get_factors(n)
-    operations += ['P' for i in range(0, factors[-2] - 1)]
-    operations.append('C')
-    operations += ['P' for i in range((int(n) // factors[-2]) - 1)]
-    return operations
-    """
-    if n == 1:
-        return ['C', 'P', 'P']
-    operations = []
-    if n % 3 == 0:
-        operations += odd(n // 3)
-    else:
-        operations.append('C')
-        operations += ['P' for i in range(int(n) - 1)]
-    operations += ['C', 'P', 'P']
-    return operations
+def no_of_times(n, div):
+    """Retruns the number of times a number divides a number"""
+    if n % div != 0:
+        return 0
+    return 1 + no_of_times(n / div, div)
 
 
 def minOperations(n):
     """calculates the fewest number of operations needed to result in exactly
     n H characters in the file."""
-    result = 0
     if n < 2:
-        return result
-    if n % 2 == 0:
-        result = even(n / 2)
-    else:
-        factors = get_factors(n)
-        if len(factors) > 2:
-            result = odd(n / 3)
-    if result:
-        return len(result)
-    return n
+        return 0
+    factors = get_factors(n)
+    prime_factors = get_prime_factors(factors)
+    p_factor_occurence = {k: no_of_times(n, k) for k in prime_factors[1:]}
+    minOps = 0
+    for k, v in p_factor_occurence.items():
+        minOps += k * v
+    return minOps
