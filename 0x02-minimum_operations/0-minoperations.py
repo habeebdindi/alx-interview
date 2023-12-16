@@ -13,6 +13,7 @@ def get_factors(n):
                 factors.append(complement)
     return factors
 
+
 def minOperations(n):
     """Calculates the fewest number of operations needed to result in exactly
     n H characters in the file."""
@@ -20,7 +21,8 @@ def minOperations(n):
         return 0
 
     factors = get_factors(n)
-    prime_factors = [factor for factor in factors if len(get_factors(factor)) < 3]
+    prime_factors = [factor for factor in factors if len(
+        get_factors(factor)) < 3]
 
     p_factor_occurrence = {}
     for factor in prime_factors[1:]:
