@@ -1,0 +1,1 @@
+## This directory contains the solution to the infamous pascal triangle problem
