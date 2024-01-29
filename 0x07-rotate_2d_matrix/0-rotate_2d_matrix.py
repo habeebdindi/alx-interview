@@ -2,19 +2,20 @@
 """This module contains a function
 """
 
+
 def rotate_2d_matrix(matrix):
     """This function rotates a 2D-Matrix
     """
-    l, r = 0, len(matrix) - 1
+    le, r = 0, len(matrix) - 1
 
-    while l < r:
-        for i in range(r - l):
-            top, bottom = l, r
+    while le < r:
+        for i in range(r - le):
+            top, bottom = le, r
 
-            topLeft = matrix[top][l + i]
-            matrix[top][l + i] = matrix[bottom - i][l]
-            matrix[bottom - i][l] = matrix[bottom][r - i]
+            topLeft = matrix[top][le + i]
+            matrix[top][le + i] = matrix[bottom - i][le]
+            matrix[bottom - i][le] = matrix[bottom][r - i]
             matrix[bottom][r - i] = matrix[top + i][r]
             matrix[top + i][r] = topLeft
         r -= 1
-        l += 1
+        le += 1
